@@ -20,9 +20,14 @@
     </header>
 
     <main id="app">
+        <!--lightbox can go here-->
+        <lightbox v-if="showLightBox" :hero="lightboxData"></lightbox>
         <nav id="character-nav">
             <ul class="characters">
                 <!-- prof thumb component goes here -->
+
+                <!--pass the data object into each new component using the :hero props binding-->
+                <herothumbnail @loadlb="loadLightBox" v-for="hero in heroData" :hero="hero"></herothumbnail>
             </ul>
         </nav>
 
@@ -30,6 +35,7 @@
             <h3>Choose Your Hero!</h3>
             <p>Use your mouse to hover / click to discover more about each Marvel character</p>
         </article>
+        <lightbox @closelb="this.showLightBox = false" v-if="showLightBox" :hero="lightboxData"></lightbox>
     </main>
     <!-- make this a sticky footer so it's always at the bottom-->
     <footer class="sticky_footer">
